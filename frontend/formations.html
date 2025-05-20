@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formations - ISET</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Animation de transition pour les boutons */
+    .button {
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #4B79A1;
+      transform: translateY(-5px);
+    }
+
+    /* Animation pour l'élément principal */
+    .fade-in {
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans p-8 min-h-screen">
+
+  <h1 class="text-5xl font-bold text-blue-800 mb-12 text-center fade-in">🚀 Nos Formations à l'ISET</h1>
+
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 fade-in">
+    <!-- Formation Informatique -->
+    <div class="bg-white p-8 rounded-lg shadow-xl transform transition hover:scale-105">
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">💻</span>
+        <h2 class="text-3xl font-semibold text-blue-700">Informatique</h2>
+      </div>
+      <p class="mt-4 text-gray-700">Formation complète en développement web, bases de données, réseaux, et plus encore. Maîtrisez les technologies du futur !</p>
+      <a href="/formations/informatique" class="button text-white bg-blue-700 hover:bg-blue-800 rounded-full py-2 px-6 mt-4 inline-block">Voir les détails</a>
+    </div>
+
+    <!-- Formation Mécanique -->
+    <div class="bg-white p-8 rounded-lg shadow-xl transform transition hover:scale-105">
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🔧</span>
+        <h2 class="text-3xl font-semibold text-blue-700">Mécanique</h2>
+      </div>
+      <p class="mt-4 text-gray-700">Devenez expert en conception, maintenance, et optimisation des systèmes mécaniques complexes.</p>
+      <a href="/formations/mecanique" class="button text-white bg-green-700 hover:bg-green-800 rounded-full py-2 px-6 mt-4 inline-block">Voir les détails</a>
+    </div>
+
+    <!-- Formation Électrique -->
+    <div class="bg-white p-8 rounded-lg shadow-xl transform transition hover:scale-105">
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">⚡</span>
+        <h2 class="text-3xl font-semibold text-blue-700">Électrique</h2>
+      </div>
+      <p class="mt-4 text-gray-700">Formation sur les systèmes électriques, électromécanique, gestion d'énergie, et plus encore.</p>
+      <a href="/formations/electrique" class="button text-white bg-yellow-600 hover:bg-yellow-700 rounded-full py-2 px-6 mt-4 inline-block">Voir les détails</a>
+    </div>
+
+    <!-- Formation Génie Civil -->
+    <div class="bg-white p-8 rounded-lg shadow-xl transform transition hover:scale-105">
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl">🏗️</span>
+        <h2 class="text-3xl font-semibold text-blue-700">Génie Civil</h2>
+      </div>
+      <p class="mt-4 text-gray-700">Formation en construction, gestion de projets, et analyse des structures. Devenez un leader dans le domaine de la construction !</p>
+      <a href="/formations/civil" class="button text-white bg-red-700 hover:bg-red-800 rounded-full py-2 px-6 mt-4 inline-block">Voir les détails</a>
+    </div>
+  </div>
+
+  <div class="text-center mt-12 fade-in">
+    <a href="acceuil.html" class="text-blue-600 hover:underline">← Retour à l'accueil</a>
+  </div>
+
+</body>
+
+</html>
