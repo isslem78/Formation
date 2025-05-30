@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes Cours - ISET</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-white min-h-screen font-sans">
+
+  <!-- 🔵 Navbar -->
+  <nav class="bg-blue-800 p-4 shadow-lg flex justify-between items-center">
+    <div class="text-white font-bold text-2xl">🎓 ISET TOZEUR</div>
+    <div class="space-x-4">
+      <a href="/acceuil" class="text-white hover:underline">🏠 Accueil</a>
+      <a href="/profil" class="text-white hover:underline">👤 Profil</a>
+      <a href="/signin" class="text-white hover:underline">🚪 Déconnexion</a>
+    </div>
+  </nav>
+
+  <!-- 🧑‍🏫 Contenu principal -->
+  <main class="px-6 py-12 animate__animated animate__fadeIn">
+    <h1 class="text-4xl font-bold text-center text-blue-900 mb-6">📚 Cours en Ligne</h1>
+    <p class="text-center text-gray-600 text-lg mb-10">
+      Apprenez à votre rythme grâce à ces supports de cours vidéos.
+    </p>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <!-- Cours 1 -->
+      <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+        <iframe class="w-full h-56" src="https://www.youtube.com/embed/QcuxMNwnaHg" 
+          title="Cours 1" allowfullscreen></iframe>
+        <div class="p-4">
+          <h2 class="text-xl font-semibold text-blue-800 mb-2">🔧Systèmes Embarqués</h2>
+          <p class="text-gray-600 text-sm">Apprenez les bases du développement web frontend.</p>
+        </div>
+      </div>
+
+      <!-- Cours 2 -->
+      <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+        <iframe class="w-full h-56" src="https://www.youtube.com/embed/w7xZl0N9ey8" 
+          title="Cours 2" allowfullscreen></iframe>
+        <div class="p-4">
+          <h2 class="text-xl font-semibold text-blue-800 mb-2">🖥Devllopement web</h2>
+          <p class="text-gray-600 text-sm">Introduction à la programmation en langage C.</p>
+        </div>
+      </div>
+
+      <!-- Cours 3 -->
+      <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+        <iframe class="w-full h-56" src="https://www.youtube.com/embed/_ifRgCb8o60" 
+          title="Cours 3" allowfullscreen></iframe>
+        <div class="p-4">
+          <h2 class="text-xl font-semibold text-blue-800 mb-2">💾 Base de données MySQL</h2>
+          <p class="text-gray-600 text-sm">Apprenez à manipuler des bases de données avec SQL.</p>
+        </div>
+      </div>
+
+      <!-- Cours 4 -->
+      <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
+        <iframe class="w-full h-56" src="https://www.youtube.com/embed/weP6BLvfzG8" 
+          title="Cours 4" allowfullscreen></iframe>
+        <div class="p-4">
+          <h2 class="text-xl font-semibold text-blue-800 mb-2">📡 Agilité</h2>
+          <p class="text-gray-600 text-sm">Les fondements des réseaux et protocoles.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 🔻 Footer -->
+  <footer class="mt-20 p-6 bg-blue-100 text-center text-sm text-gray-600">
+    &copy; 2025 ISET Sfax - Tous droits réservés.
+  </footer>
+
+</body>
+</html>

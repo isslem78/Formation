@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Détails Formation Informatique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8 font-sans">
+
+  <h1 class="text-4xl font-bold mb-6 text-blue-800">Formations Informatique</h1>
+
+  <div id="formations-list" class="space-y-6">
+    Chargement des formations...
+  </div>
+
+  <a href="/formations" class="text-blue-600 hover:underline mt-8 inline-block">← Retour aux formations</a>
+
+  <script>
+    const domaine = 'informatique';
+
+    fetch(`/api/formations/${domaine}`)
+      .then(response => {
+        if (!response.ok) throw new Error('Erreur réseau');
+        return response.json();
+      })
+      .then(data => {
+        const container = document.getElementById('formations-list');
+        container.innerHTML = '';
+
+        if (data.length === 0) {
+          container.innerHTML = '<p>Aucune formation trouvée.</p>';
+          return;
+        }
+
+        data.forEach(formation => {
+          const div = document.createElement('div');
+          div.className = "border border-gray-300 rounded-lg p-4 bg-white shadow";
+          div.innerHTML = `
+            <h2 class="text-2xl font-semibold mb-2">${formation.titre}</h2>
+            <p class="mb-2">${formation.description}</p>
+            <p><strong>Durée :</strong> ${formation.duree}</p>
+            <p><strong>Prix :</strong> ${formation.prix} €</p>
+            <a href="/inscription.html?formationId=${formation.id}" 
+               class="inline-block mt-4 bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">
+               S'inscrire
+            </a>
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(err => {
+        document.getElementById('formations-list').innerHTML = '<p>Erreur lors du chargement des formations.</p>';
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>

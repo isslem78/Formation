@@ -1,17 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Connexion</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <form action="/signin" method="POST" class="bg-white p-6 rounded-lg shadow-md w-80">
-    <h2 class="text-xl font-bold mb-4 text-center">Connexion</h2>
-    <input name="email" type="email" placeholder="Email" required class="w-full p-2 mb-3 border rounded" />
-    <input name="password" type="password" placeholder="Mot de passe" required class="w-full p-2 mb-3 border rounded" />
-    <button class="bg-green-500 text-white w-full p-2 rounded hover:bg-green-600">Se connecter</button>
-    <p class="mt-2 text-sm text-center">Pas encore de compte ? <a href="/signup.html" class="text-blue-600">S'inscrire</a></p>
-  </form>
+<body class="bg-gradient-to-r from-blue-400 to-blue-700 min-h-screen flex items-center justify-center px-6">
+  <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full flex overflow-hidden">
+    
+    <!-- Section Description -->
+    <div class="hidden md:flex flex-col justify-center bg-blue-600 text-white p-12 w-1/2">
+      <h2 class="text-4xl font-extrabold mb-4">Bienvenue chez ISET TOZEUR</h2>
+      <p class="text-lg leading-relaxed">
+        Connectez-vous pour accéder à vos cours, supports et ressources exclusives.  
+        Rejoignez une communauté d’apprenants passionnés et développez vos compétences avec nos contenus interactifs et vidéos.
+      </p>
+      <p class="mt-6 italic text-blue-200">“L’éducation est la clé qui ouvre la porte de l’avenir.”</p>
+    </div>
+
+    <!-- Section Formulaire -->
+    <form action="/signin" method="POST" class="w-full md:w-1/2 p-10">
+      <h2 class="text-3xl font-semibold text-blue-700 mb-8 text-center">Connexion</h2>
+      
+      <input 
+        name="email" 
+        type="email" 
+        placeholder="Email" 
+        required 
+        class="w-full mb-5 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+      />
+      
+      <input 
+        name="password" 
+        type="password" 
+        placeholder="Mot de passe" 
+        required 
+        class="w-full mb-6 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+      />
+      
+      <button 
+        type="submit" 
+        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+      >
+        Se connecter
+      </button>
+
+      <p class="mt-6 text-center text-sm text-gray-600">
+        Pas encore de compte ? 
+        <a href="/signup.html" class="text-blue-700 font-medium hover:underline">S'inscrire</a>
+      </p>
+    </form>
+  </div>
 </body>
 </html>

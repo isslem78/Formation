@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tableau de bord Administrateur</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+
+  <div class="container mx-auto py-10 px-6 max-w-4xl">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">👨‍💼 Tableau de bord Administrateur</h1>
+
+    <!-- Statistiques -->
+    <section class="mb-8 p-6 bg-white rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">📊 Statistiques globales</h2>
+      <div class="flex space-x-8">
+        <div>
+          <p class="text-4xl font-bold" id="totalStudents">0</p>
+          <p class="text-gray-600">Total étudiants</p>
+        </div>
+        <div>
+          <p class="text-4xl font-bold text-green-600" id="activeStudents">0</p>
+          <p class="text-gray-600">Étudiants actifs</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulaire d'ajout -->
+    <section class="mb-8 p-6 bg-white rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">➕ Ajouter un étudiant</h2>
+      <form id="addStudentForm" class="flex flex-wrap gap-4">
+        <input type="text" id="nom" placeholder="Nom" required class="border p-2 rounded flex-grow" />
+        <input type="text" id="prenom" placeholder="Prénom" required class="border p-2 rounded flex-grow" />
+        <input type="email" id="email" placeholder="Email" required class="border p-2 rounded flex-grow" />
+        <input type="text" id="department" placeholder="Département" class="border p-2 rounded flex-grow" />
+        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded">Ajouter</button>
+      </form>
+    </section>
+
+    <!-- Liste des étudiants -->
+    <section class="p-6 bg-white rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">📋 Liste des étudiants</h2>
+      <div id="studentList" class="space-y-2 max-h-96 overflow-y-auto">
+        <!-- Liste dynamique ici -->
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Charger les stats
+    function loadStats() {
+      fetch('/admin/stats')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('totalStudents').textContent = data.total_students;
+          document.getElementById('activeStudents').textContent = data.active_students;
+        })
+        .catch(err => console.error('Erreur stats :', err));
+    }
+
+    // Charger les étudiants
+    function loadStudents() {
+      fetch('/admin/students')
+        .then(res => res.json())
+        .then(data => {
+          const studentList = document.getElementById('studentList');
+          studentList.innerHTML = '';
+
+          data.forEach(student => {
+            const activeClass = student.active ? 'text-green-600' : 'text-red-600';
+            const activeText = student.active ? 'Activé' : 'Désactivé';
+
+            const studentDiv = document.createElement('div');
+            studentDiv.className = "flex justify-between items-center bg-gray-50 p-4 rounded shadow";
+
+            studentDiv.innerHTML = `
+              <div>
+                <p><strong>${student.nom} ${student.prenom}</strong> (${student.email})</p>
+                <p class="text-sm text-gray-600">Département : ${student.department || '-'}</p>
+                <p class="${activeClass} font-semibold text-sm">Statut : ${activeText}</p>
+              </div>
+              <div class="flex space-x-2">
+                <button onclick="toggleActive(${student.id}, ${student.active})" 
+                  class="px-4 py-1 rounded text-white ${student.active ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-500 hover:bg-blue-600'}">
+                  ${student.active ? 'Désactiver' : 'Activer'}
+                </button>
+                <button onclick="deleteStudent(${student.id})" 
+                  class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">
+                  🗑 Supprimer
+                </button>
+              </div>
+            `;
+            studentList.appendChild(studentDiv);
+          });
+        })
+        .catch(err => console.error('Erreur étudiants :', err));
+    }
+
+    // Supprimer un étudiant
+    function deleteStudent(id) {
+      if (!confirm('Confirmer la suppression ?')) return;
+
+      fetch('/admin/students/' + id, { method: 'DELETE' })
+        .then(res => {
+          if (res.ok) {
+            alert('Étudiant supprimé');
+            loadStudents();
+            loadStats();
+          } else {
+            alert('Erreur suppression');
+          }
+        });
+    }
+
+    // Changer le statut d'un étudiant
+    function toggleActive(id, currentStatus) {
+      fetch(`/admin/students/${id}/activate`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ active: !currentStatus })
+      })
+      .then(res => {
+        if (res.ok) {
+          loadStudents();
+          loadStats();
+        } else {
+          alert('Erreur activation/désactivation');
+        }
+      });
+    }
+
+    // Ajouter un étudiant
+    document.getElementById('addStudentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nom = document.getElementById('nom').value.trim();
+      const prenom = document.getElementById('prenom').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const department = document.getElementById('department').value.trim();
+
+      if (!nom || !prenom || !email) {
+        alert('Nom, prénom et email obligatoires');
+        return;
+      }
+
+      fetch('/admin/students', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ nom, prenom, email, department })
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('Étudiant ajouté');
+          this.reset();
+          loadStudents();
+          loadStats();
+        } else {
+          alert('Erreur ajout étudiant');
+        }
+      });
+    });
+
+    // Chargement initial
+    window.onload = () => {
+      loadStats();
+      loadStudents();
+    }
+  </script>
+
+</body>
+</html>
